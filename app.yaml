@@ -1,0 +1,14 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+handlers:
+- url: /
+  script: main.app
+- url: /.*
+  script: main.app
+  login: required
+
+instance_class: B1
+basic_scaling:
+  max_instances: 2
+  idle_timeout: 5m

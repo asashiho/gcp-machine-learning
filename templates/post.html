@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Uploaded</title>
+  </head>
+  <body>
+</p>
+  <img src="{{ storage_path }}/{{ filename }}" style="max-width: 30%">
+  <div>Tags:
+  {% for tag in tags %} [{{ tag }}] {% endfor %}
+  </div>
+</p>
+<form action={{ url_for('photos') }}>
+  <input type=submit value='アルバムに戻る' style="font-size: 1.0em">
+</form>
+
+  </body>
+</html>

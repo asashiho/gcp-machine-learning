@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Photo Album</title>
+  </head>
+
+  <body>
+
+{% from "_formhelpers.html" import render_field %}
+
+<h1>写真アルバム</h1>
+<form method=post action={{ url_for('photos') }} enctype="multipart/form-data">
+  {{ render_field(tag_form.tag) }}
+</form>
+<hr>
+<form method=post action={{ url_for('post') }} enctype="multipart/form-data">
+  {{ render_field(photo_form.input_photo) }}
+  </p>
+  <input type=submit value='Upload' name='submit' style="font-size: 1.0em">
+</form>
+<hr>
+{% for photo in photos %}
+  <div>{{ photo.timestamp | local_tz }}</dev>
+  </p>
+  <img src="{{ storage_path }}/{{ photo.key.id() }}" style="max-width: 30%">
+  <div>Tags: 
+  {% for tag in photo.tags %} [{{ tag }}] {% endfor %}
+  <form method=post action={{ url_for('delete') }} enctype="multipart/form-data">
+    <input type=submit value='Delete' name='{{ photo.key.id() }}' style="font-size: 1.0em">
+  </form>
+  </div>
+  <hr>
+{% endfor %}
+
+<script>
+document.getElementById('tag').onchange = function(){ this.form.submit() }
+</script>
+
+  </body>
+</html>
